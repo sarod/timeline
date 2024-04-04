@@ -80,8 +80,13 @@
 
 .day {
   flex: auto;
-  width: 30px;
-  border: 1px solid;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 0px;
+}
+.day:last-of-type {
+  border-right: 1px solid;
 }
 
 .day.weekend {
