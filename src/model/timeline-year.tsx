@@ -3,7 +3,6 @@ import { Season, buildSeasons } from "./season";
 
 export type TimelineYear = {
   months: TimelineMonth[];
-  seasons: Season[];
 };
 
 export function currentYear(): number {
@@ -19,7 +18,6 @@ export function buildTimelineYear(
     buildTimelineMonth(year, monthIdx, seasons, localeName),
   );
   return {
-    months: months,
-    seasons: seasons,
+    months: months
   };
 }
