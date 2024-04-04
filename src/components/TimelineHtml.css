@@ -1,0 +1,101 @@
+.timeline-year {
+  flex-direction: column;
+}
+
+.timeline-month-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  break-inside: avoid;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.timeline-month {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-month-tongue {
+  width: 0px;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid #fafafa;
+}
+
+.timeline-month-arrow {
+  width: 0px;
+  border-top: 162px solid transparent;
+  border-bottom: 162px solid transparent;
+  border-left: 162px solid #fafafa;
+}
+
+.month-header {
+  display: block;
+  position: relative;
+}
+
+.month-name-anchor {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 175px;
+  width: 100%;
+}
+.season-images-container {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.season-images-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.season-image {
+}
+
+.month-name {
+  border-radius: 4em;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 2em;
+  padding: 0.5em;
+  width: 8em;
+}
+
+.season-bar {
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+}
+
+.days-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.day {
+  flex: auto;
+  width: 30px;
+  border: 1px solid;
+}
+
+.day.weekend {
+  background-color: lightgrey;
+}
+
+.day-of-month {
+  border-bottom: 1px solid;
+}
+
+.day-of-week {
+  height: 100px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  vertical-align: middle;
+  transform: rotate(-180deg);
+}
