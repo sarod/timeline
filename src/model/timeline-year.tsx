@@ -1,5 +1,5 @@
 import { TimelineMonth, buildTimelineMonth } from "./timeline-month";
-import { Season, buildSeasons } from "./season";
+import { buildSeasons } from "./season";
 
 export type TimelineYear = {
   months: TimelineMonth[];
