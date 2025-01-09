@@ -1,57 +1,17 @@
 import "./TimelineHtml.css";
 
-import springUrl from "../assets/spring.jpg";
-
-import summerUrl from "../assets/summer.jpg";
-
-import fallUrl from "../assets/fall.jpg";
-import winterUrl from "../assets/winter.jpg";
 import { TimelineYear } from "../model/timeline-year";
 import { TimelineDay } from "../model/timeline-day";
-
-function isWeekEnd(day: TimelineDay): boolean {
-  return day.dayOfWeekIndex == 0 || day.dayOfWeekIndex == 6;
-}
-
-interface SeasonStyle {
-  imageUrl: string;
-  color: string;
-}
-
-const seasonStyles: Record<string, SeasonStyle> = {
-  spring: {
-    imageUrl: springUrl,
-    color: "#3d883d",
-  },
-  summer: {
-    imageUrl: summerUrl,
-    color: "#fdd218c2",
-  },
-  fall: {
-    imageUrl: fallUrl,
-    color: "#ff7100",
-  },
-  winter: {
-    imageUrl: winterUrl,
-    color: "lightblue",
-  },
-};
-
-
+import { SeasonStyles } from "./SeasonStyles";
 
 
 const dayWidth = 30;
 const dayWidthUnit = "px";
 
-
-function daysWidth(days: number) {
-  return (dayWidth * days).toString() + dayWidthUnit;
-}
-
-export function TimelineHtml(props: { timelineYear: TimelineYear }) {
+export function TimelineHtml({timelineYear, seasonStyles}: { timelineYear: TimelineYear, seasonStyles: SeasonStyles }) {
   return (
     <div className="timeline-year">
-      {props.timelineYear.months.map((month) => {
+      {timelineYear.months.map((month) => {
         return (
           <div key={month.name} className="timeline-month-container">
             <div
@@ -129,4 +89,13 @@ export function TimelineHtml(props: { timelineYear: TimelineYear }) {
       })}
     </div>
   );
+}
+
+function isWeekEnd(day: TimelineDay): boolean {
+  return day.dayOfWeekIndex == 0 || day.dayOfWeekIndex == 6;
+}
+
+
+function daysWidth(days: number) {
+  return (dayWidth * days).toString() + dayWidthUnit;
 }
