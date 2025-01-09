@@ -1,9 +1,9 @@
 import { TimelineMonth, buildTimelineMonth } from "./timeline-month";
 import { buildSeasons } from "./season";
 
-export type TimelineYear = {
+export interface TimelineYear  {
   months: TimelineMonth[];
-};
+}
 
 export function currentYear(): number {
   return new Date().getUTCFullYear();

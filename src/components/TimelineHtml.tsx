@@ -13,12 +13,12 @@ function isWeekEnd(day: TimelineDay): boolean {
   return day.dayOfWeekIndex == 0 || day.dayOfWeekIndex == 6;
 }
 
-type SeasonStyle = {
+interface SeasonStyle {
   imageUrl: string;
   color: string;
-};
+}
 
-const seasonStyles: { [seasonId: string]: SeasonStyle } = {
+const seasonStyles: Record<string, SeasonStyle> = {
   spring: {
     imageUrl: springUrl,
     color: "#3d883d",
@@ -43,6 +43,11 @@ const seasonStyles: { [seasonId: string]: SeasonStyle } = {
 const dayWidth = 30;
 const dayWidthUnit = "px";
 
+
+function daysWidth(days: number) {
+  return (dayWidth * days).toString() + dayWidthUnit;
+}
+
 export function TimelineHtml(props: { timelineYear: TimelineYear }) {
   return (
     <div className="timeline-year">
@@ -51,7 +56,7 @@ export function TimelineHtml(props: { timelineYear: TimelineYear }) {
           <div key={month.name} className="timeline-month-container">
             <div
               className="timeline-month"
-              style={{ width: dayWidth * month.days.length + dayWidthUnit}}
+              style={{ width: daysWidth(month.days.length)}}
             >
               <div className="month-header">
                 <div className="season-images-container">
@@ -60,7 +65,7 @@ export function TimelineHtml(props: { timelineYear: TimelineYear }) {
                       key={fragment.seasonId}
                       className="season-image-container"
                       style={{
-                        width: dayWidth * fragment.fragmentLength + dayWidthUnit,
+                        width: daysWidth(fragment.fragmentLength),
                         height: "100%",
                         overflow: "hidden",
                       }}
@@ -69,10 +74,10 @@ export function TimelineHtml(props: { timelineYear: TimelineYear }) {
                         src={seasonStyles[fragment.seasonId].imageUrl}
                         className="season-image"
                         style={{
-                          left: -dayWidth * fragment.firstSeasonDay + dayWidthUnit,
+                          left: daysWidth(-fragment.firstSeasonDay),
                           position: "relative",
                           /* width must be at least large as the full season without stretching too much the image*/
-                          width: 100  * dayWidth + dayWidthUnit,
+                          width: daysWidth(100),
                         }}
                       />
                     </div>
@@ -88,7 +93,7 @@ export function TimelineHtml(props: { timelineYear: TimelineYear }) {
                     key={fragment.seasonId}
                     className="season-fragment"
                     style={{
-                      width: dayWidth * fragment.fragmentLength + dayWidthUnit,
+                      width: daysWidth(fragment.fragmentLength),
                       backgroundColor: seasonStyles[fragment.seasonId].color,
                     }}
                   ></div>
@@ -102,8 +107,8 @@ export function TimelineHtml(props: { timelineYear: TimelineYear }) {
                     key={day.dayOfMonth}
                     className={"day" + (isWeekEnd(day) ? " weekend" : "")}
                     style={{
-                      width: dayWidth + dayWidthUnit,
-                      minWidth: dayWidth + dayWidthUnit
+                      width: daysWidth(1),
+                      minWidth: daysWidth(1)
                     }}
                   >
                     <div className="day-of-month">{day.dayOfMonth}</div>

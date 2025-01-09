@@ -6,23 +6,23 @@ import { range } from "./range";
 import { capitalizeFirstLetter } from "./util/capitalizeFirstLetter";
 import { Season } from "./season";
 
-type SeasonFragment = {
+interface SeasonFragment {
   seasonId: string;
   /* Number of days of this season in the month*/
   fragmentLength: number;
   /* Which season day matches the first day of the fragmen*/
   firstSeasonDay: number;
-};
+}
 
-export type TimelineMonth = {
+export interface TimelineMonth  {
   name: string;
   monthIdx: number;
   days: TimelineDay[];
   seasonFragments: SeasonFragment[];
-};
+}
 
 function monthName(monthIdx: number, localeName: string): string {
-  const format = new Intl.DateTimeFormat(localeName, { month: "long" }).format;
+  const format = (date: Date) => new Intl.DateTimeFormat(localeName, { month: "long" }).format(date);
   return capitalizeFirstLetter(format(new Date(Date.UTC(2024, monthIdx))));
 }
 

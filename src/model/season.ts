@@ -1,10 +1,10 @@
 import { dayOfYear } from "./dayOfYear";
 
-export type Season = {
+export interface Season {
   id: string;
   startDayOfYearIndex: number;
   endDayOfYearIndex: number;
-};
+}
 
 export function buildSeasons(year: number): Season[] {
   return [
