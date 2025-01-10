@@ -4,13 +4,16 @@ import { TimelineYear } from "../model/timeline-year";
 import { TimelineDay } from "../model/timeline-day";
 import { SeasonStyles } from "./SeasonStyles";
 import { SeasonFragment } from "../model/timeline-month";
+import { defaultSeasonStyles } from "./defaultSeasonStyles";
 
 export function TimelineHtml({
   timelineYear,
-  seasonStyles,
+  seasonStyles = defaultSeasonStyles,
+  useSeasonDecorators = true,
 }: {
   timelineYear: TimelineYear;
-  seasonStyles: SeasonStyles;
+  seasonStyles?: SeasonStyles;
+  useSeasonDecorators?: boolean;
 }) {
   return (
     <div
@@ -61,7 +64,15 @@ export function TimelineHtml({
                       ...fragmentCssVariables(fragment),
                       backgroundColor: seasonStyles[fragment.seasonId].color,
                     }}
-                  ></div>
+                  >
+                    {fragment.firstSeasonDay === 0 &&
+                    month.monthIdx !== 0 &&
+                    useSeasonDecorators ? (
+                      <div className="season-bar-fragment-decorator">
+                        {seasonEmoji(fragment.seasonId)}
+                      </div>
+                    ) : null}
+                  </div>
                 ))}
               </div>
               <div className="days-container">
@@ -100,4 +111,19 @@ function fragmentCssVariables(fragment: SeasonFragment): React.CSSProperties {
 
 function isWeekEnd(day: TimelineDay): boolean {
   return day.dayOfWeekIndex == 0 || day.dayOfWeekIndex == 6;
+}
+
+function seasonEmoji(seasonId: string): string {
+  switch (seasonId) {
+    case "summer":
+      return "☀️";
+    case "spring":
+      return "🌸";
+    case "winter":
+      return "❄️";
+    case "fall":
+      return "🍂";
+    default:
+      return "";
+  }
 }
