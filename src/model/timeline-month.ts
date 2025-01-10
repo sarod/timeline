@@ -6,12 +6,14 @@ import { range } from "./range";
 import { capitalizeFirstLetter } from "./util/capitalizeFirstLetter";
 import { Season } from "./season";
 
-interface SeasonFragment {
+export interface SeasonFragment {
   seasonId: string;
   /* Number of days of this season in the month*/
   fragmentLength: number;
   /* Which season day matches the first day of the fragmen*/
   firstSeasonDay: number;
+  /* First Month day of the fragment 0 if fragment starts on first day of month*/
+  firstMonthDay: number;
 }
 
 export interface TimelineMonth  {
@@ -66,6 +68,7 @@ function seasonsFragmentsForMonth(
           fragmentStartDay <= season.startDayOfYearIndex
             ? 0
             : fragmentStartDay - season.startDayOfYearIndex + 1,
+            firstMonthDay: fragmentStartDay - firstDayOfMonth 
       };
     });
 }

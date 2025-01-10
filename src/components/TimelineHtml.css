@@ -14,6 +14,7 @@
 .timeline-month {
   display: flex;
   flex-direction: column;
+  width: calc(var(--month-days) * var(--day-width));
 }
 
 .timeline-month-tongue {
@@ -45,19 +46,58 @@
   width: 100%;
 }
 .season-images-container {
+  display: block;
   position: absolute;
   z-index: 0;
   width: 100%;
   height: 100%;
 }
 
-.season-images-container {
-  display: flex;
-  flex-direction: row;
+.season-image-container {
+  position: absolute;
+  height: 100%;
+  overflow: hidden;
+  left: calc(var(--day-width) * var(--fragment-first-month-day));
+  width: calc(var(--day-width) * var(--fragment-days));
+}
+
+/* First of 2 season fragments in month*/
+.season-image-container:first-child:nth-last-child(2) {
+  width: calc(
+    var(--day-width) * var(--fragment-days) + 0.5 * var(--season-blending-width)
+  );
+  /**  mask-image: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 100%)
+      calc(var(--day-width) * var(--fragment-days) - var(--season-blending-width)),
+    rgb(0 0 0 / 0%) calc(var(--day-width) * var(--fragment-days) + 0.5 * var(--season-blending-width))
+  );*/
+}
+
+/* Second of 2 season fragments in month*/
+.season-image-container:nth-child(2):nth-last-child(1) {
+  left: calc(
+    var(--day-width) * var(--fragment-first-month-day) - 0.5 *
+      var(--season-blending-width)
+  );
+  width: calc(
+    var(--day-width) * var(--fragment-days) + 0.5 * var(--season-blending-width)
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 0%) 0px,
+    rgb(0 0 0 / 100%) calc(var(--season-blending-width))
+  );
 }
 
 .season-image {
-  
+  left: calc(
+    var(--day-width) * -1 * var(--fragment-first-season-day) -
+      var(--season-blending-width)
+  );
+  position: absolute;
+  /* width must be at least large as the full season without stretching too much the image*/
+  width: calc(var(--day-width) * 100 + var(--season-blending-width));
 }
 
 .month-name {
@@ -74,6 +114,10 @@
   flex-direction: row;
 }
 
+.season-bar-fragment {
+  width: calc(var(--day-width) * var(--fragment-days));
+}
+
 .days-container {
   display: flex;
   flex-direction: row;
@@ -86,6 +130,8 @@
   border-left: 1px solid;
   border-right: 0px;
   display: grid;
+  width: var(--day-width);
+  min-width: var(--day-width);
 }
 .day:last-of-type {
   border-right: 1px solid;
