@@ -82,6 +82,7 @@ export function TimelineHtml({
                     className={"day" + (isWeekEnd(day) ? " weekend" : "")}
                   >
                     <div className="day-of-month">{day.dayOfMonth}</div>
+                    <div className="moon-phase">{day.moonQuarterEmoji}</div>
                     <div className="day-of-week">{day.dayOfWeekName}</div>
                   </div>
                 ))}

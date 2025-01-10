@@ -143,6 +143,10 @@
   border-bottom: 1px solid;
 }
 
+.moon-phase {
+  height: 24px;
+}
+
 .day-of-week {
   height: 100px;
   writing-mode: vertical-rl;
