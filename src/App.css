@@ -4,3 +4,9 @@
   padding: 2rem;
   text-align: center;
 }
+
+@media print {
+  #root {
+    padding: 0 2rem;
+  }
+}
